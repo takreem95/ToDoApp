@@ -1,0 +1,40 @@
+<div id="custom-overlay" [style.display]="splash ? 'flex': 'none'">
+  <div class="flb">
+    <div class="Aligner-item Aligner-item--top"></div>
+    <img src="assets/icon.png">
+    <div class="Aligner-item Aligner-item--bottom"></div>
+  </div>
+</div>
+<ion-header>
+  <ion-navbar color="danger">
+    <ion-title style="text-align:center">
+      TODO APP
+    </ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="addItem()"><ion-icon name="create" color="dark"></ion-icon></button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding [hidden]="!items || items.length <= 0" text-center class="vertical-align-content" [hidden]="items && items.length > 0">
+  <ion-grid>
+    <ion-row>
+      <ion-col class="readjust">
+        No item has been added. Use the "<ion-icon name="create"></ion-icon>" button to add a new item.
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+
+<ion-content>
+    <ion-list>
+        <ion-item-sliding *ngFor="let item of items">
+        <ion-item (click)="viewItem(item)" class="border">{{item.title}}</ion-item>
+        <ion-item-options side="left">
+            <button ion-button icon-only color="dark" (click)="delete(item)"><ion-icon name="trash"></ion-icon></button>
+            <button ion-button icon-only color="danger" (click)="edit(item)"><ion-icon name="create"></ion-icon></button>
+            <button ion-button icon-only color="dark" (click)="share(item)" class="position"><ion-icon ios="ios-done-all" md="md-done-all"></ion-icon></button>
+          </ion-item-options>
+          </ion-item-sliding>
+      </ion-list>
+</ion-content>
